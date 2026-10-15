@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TNA พช.เชียงราย 2570</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column (form) with a sticky progress strip; admin summary as a second tab. CDD navy + logo gold. */
+:root{
+  --bg:#f4f5f9; --surface:#ffffff; --ink:#161b33; --muted:#5a6280; --line:#dde1ec;
+  --navy:#1f2f7a; --on-navy:#ffffff; --navy-soft:#e8ebf8; --gold:#b9861f; --gold-soft:#f7eed9;
+  --danger:#b3261e; --danger-soft:#fbe9e7; --ok:#2b7a4b; --ok-soft:#e3f3ea;
+  --f-display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai","Sarabun","Leelawadee UI","Tahoma",system-ui,sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1121; --surface:#161a2e; --ink:#e7e9f3; --muted:#9ba2bf; --line:#2a3051;
+  --navy:#93a5ff; --on-navy:#0e1121; --navy-soft:#1e2447; --gold:#e2b75a; --gold-soft:#352b18;
+  --danger:#ff8f86; --danger-soft:#3a1d1b; --ok:#72d39b; --ok-soft:#173326; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1121; --surface:#161a2e; --ink:#e7e9f3; --muted:#9ba2bf; --line:#2a3051;
+  --navy:#93a5ff; --on-navy:#0e1121; --navy-soft:#1e2447; --gold:#e2b75a; --gold-soft:#352b18;
+  --danger:#ff8f86; --danger-soft:#3a1d1b; --ok:#72d39b; --ok-soft:#173326; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:24px 80px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(1.6rem,4.5vw,2.2rem);font-weight:700}
+h2{font-size:1.3rem;font-weight:600}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:.875rem}
+.eyebrow{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600}
+header.top{display:grid;gap:10px;padding-block:8px 20px;border-bottom:2px solid var(--navy)}
+header.top .org{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:var(--muted);font-size:.9rem}
+.tabs{display:flex;gap:6px;margin-top:18px}
+.tabs button{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
+.intro{display:grid;gap:10px;margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.intro ul{margin:0;padding-left:1.2em}
+.trends{border-top:1px solid var(--line);padding-top:10px}
+.trends summary{cursor:pointer;font-weight:600;color:var(--navy)}
+.trend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:12px;font-size:.88rem}
+.trend-grid>div{display:grid;gap:4px;align-content:start;background:var(--bg);border-radius:8px;padding:12px}
+.trend-grid b{font-family:var(--f-display);color:var(--gold)}
+.progress{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;margin-top:8px;display:flex;gap:12px;align-items:center}
+.bar{flex:1;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:var(--gold);transition:width .25s}
+.progress span{font-variant-numeric:tabular-nums;font-size:.85rem;color:var(--muted);min-width:7ch;text-align:right}
+section.part{margin-top:28px;display:grid;gap:14px}
+.part-head{display:grid;gap:4px}
+.part-head .no{font-family:var(--f-display);color:var(--navy);font-weight:700}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+label.f{display:grid;gap:6px;font-weight:500;min-width:0}
+input[type=text],select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 11px;width:100%}
+textarea{min-height:84px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,.seg input:focus-visible+span,.chk input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+.req{color:var(--danger)}
+.rubric{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;font-size:.88rem}
+.rubric ol{margin:4px 0 0;padding-left:1.3em}
+.rubric b{font-family:var(--f-display)}
+.domain{display:grid;gap:10px}
+.domain-title{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding-top:6px}
+.domain-title .tag{font-family:var(--f-display);font-weight:700;color:var(--on-navy);background:var(--navy);border-radius:6px;padding:0 8px;font-size:.9rem}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:10px}
+.item.missing{border-color:var(--danger);background:linear-gradient(var(--danger-soft),var(--danger-soft)) padding-box}
+.item-head{display:grid;grid-template-columns:auto 1fr;gap:4px 10px}
+.item-head .code{font-family:var(--f-display);font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
+.item-head .hint{grid-column:2;font-size:.85rem;color:var(--muted)}
+.scales{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:end}
+.scales fieldset{border:0;margin:0;padding:0;display:grid;gap:4px;min-width:0}
+.scales legend{font-size:.82rem;color:var(--muted);padding:0;margin-bottom:4px}
+.seg{display:flex;gap:4px}
+.seg label{cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:grid;place-items:center;width:38px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-weight:600;font-variant-numeric:tabular-nums}
+.seg input:checked+span{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
+.item.na .scales fieldset{opacity:.35;pointer-events:none}
+.chk{display:inline-flex;gap:8px;align-items:center;cursor:pointer;font-size:.9rem}
+.chk input{width:18px;height:18px;accent-color:var(--navy)}
+.ranks{display:grid;gap:8px;margin-top:4px}
+.ranks label{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:10px;align-items:center;font-weight:500}
+.ranks select{min-width:0}
+#w-top{display:grid;gap:6px}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px 18px}
+.choices .chk{font-size:.95rem;align-items:flex-start}
+.choices .chk input{margin-top:5px;flex:none}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:24px}
+.btn{font:inherit;font-weight:600;border-radius:8px;padding:11px 20px;cursor:pointer;border:1px solid var(--navy);background:var(--navy);color:var(--on-navy)}
+.btn.ghost{background:transparent;color:var(--navy)}
+.btn:disabled{opacity:.55;cursor:default}
+.notice{border-radius:var(--r);padding:12px 14px;font-size:.95rem}
+.notice.ok{background:var(--ok-soft);color:var(--ok)}
+.notice.err{background:var(--danger-soft);color:var(--danger)}
+.notice.info{background:var(--gold-soft);color:var(--ink)}
+.codebox{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;word-break:break-all;background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:10px;max-height:140px;overflow:auto}
+/* admin */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.kpi b{display:block;font-family:var(--f-display);font-size:1.7rem;font-variant-numeric:tabular-nums;color:var(--navy)}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.filters label{display:grid;gap:4px;font-size:.82rem;color:var(--muted);flex:1 1 170px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-weight:600;font-size:.8rem;color:var(--muted);background:var(--bg)}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+tr.top td:first-child{box-shadow:inset 3px 0 var(--gold)}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;border-radius:99px;padding:1px 9px;background:var(--navy-soft);color:var(--navy);white-space:nowrap}
+.pill.hot{background:var(--gold-soft);color:var(--gold)}
+.pni{display:flex;gap:8px;align-items:center;min-width:140px}
+.pni .track{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.pni .track i{display:block;height:100%;background:var(--gold)}
+.hbars{display:grid;gap:8px}
+.hbar{display:grid;grid-template-columns:minmax(0,1fr) 3fr auto;gap:10px;align-items:center;font-size:.9rem}
+.hbar .track{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.hbar .track i{display:block;height:100%;background:var(--navy)}
+.hbar span:last-child{font-variant-numeric:tabular-nums;color:var(--muted);min-width:4ch;text-align:right}
+.voices{display:grid;gap:10px}
+.voice{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:4px;font-size:.92rem}
+.voice .who{font-weight:600}
+.empty{padding:28px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:480px){.seg span{width:34px}}
+body{margin:0}
+[hidden]{display:none!important}
+img{max-width:100%}
+.login{display:grid;gap:10px;margin-top:18px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Training Needs Assessment · ปีงบประมาณ 2570</div>
+    <h1>แบบสำรวจความต้องการในการพัฒนาบุคลากร</h1>
+    <div class="org"><span>สำนักงานพัฒนาชุมชนจังหวัดเชียงราย</span><span>·</span><span>ต่อยอด CDD NextGen Hackathon 2026</span></div>
+  </header>
+
+  <nav class="tabs" id="tabs" hidden role="tablist">
+    <button type="button" role="tab" id="tab-form" aria-selected="true">แบบสำรวจ</button>
+    <button type="button" role="tab" id="tab-admin" aria-selected="false">สรุปผล (ผู้ดูแล)</button>
+  </nav>
+
+  <!-- ================= FORM ================= -->
+  <main id="view-form">
+    <div class="intro">
+      <h2>คำชี้แจง</h2>
+      <p>แบบสำรวจนี้ใช้วิเคราะห์ช่องว่างสมรรถนะ (Competency Gap) ของบุคลากร พช.เชียงราย เพื่อจัดทำแผนพัฒนาบุคลากรและแผนพัฒนารายบุคคล (IDP) ปี 2570 ให้สอดคล้องกับทิศทาง CD Next ที่เน้น <b>งาน–งบ–ระบบ–คน</b> และการใช้ข้อมูลและ AI ในงานพัฒนาชุมชน</p>
+      <ul class="small">
+        <li>ประเมินแต่ละหัวข้อ 2 มิติ คือ <b>ความสำคัญต่องานของท่าน</b> และ <b>ความสามารถของท่านในปัจจุบัน</b></li>
+        <li>ไม่มีคำตอบถูกหรือผิด โปรดตอบตามความเป็นจริง ผลใช้เพื่อวางแผนพัฒนาเท่านั้น ไม่ใช้ประเมินผลการปฏิบัติราชการ</li>
+        <li>ใช้เวลาประมาณ 15–20 นาที ระบบบันทึกร่างไว้ในเครื่องของท่านระหว่างกรอก</li>
+      </ul>
+      <details class="trends">
+        <summary>เทรนด์การพัฒนาบุคลากรที่ใช้ออกแบบแบบสำรวจนี้</summary>
+        <div class="trend-grid">
+          <div><b>ทักษะเปลี่ยนเร็ว</b><p>WEF Future of Jobs 2025 คาดว่าราว 39% ของทักษะหลักจะเปลี่ยนภายในปี 2030 ทักษะที่โตเร็วที่สุดคือ AI และข้อมูล ความปลอดภัยไซเบอร์ และความรู้เท่าทันเทคโนโลยี ควบคู่กับการคิดสร้างสรรค์ ความยืดหยุ่น และการเรียนรู้ตลอดชีวิต → ด้าน A, B, F</p></div>
+          <div><b>AI Literacy สำหรับทุกคน</b><p>ภาครัฐทั่วโลกและไทยเร่งพัฒนาทักษะ AI ของข้าราชการเป็นลำดับขั้น ตั้งแต่ใช้เป็น ปรับแต่งได้ จนบูรณาการเข้ากับงาน พร้อมจริยธรรม → ด้าน B</p></div>
+          <div><b>ทักษะดิจิทัลข้าราชการ</b><p>กรอบทักษะดิจิทัลของ ก.พ. / สพร. (DGA) และ OECD Digital Talent Framework เน้นกฎหมายรัฐบาลดิจิทัล การออกแบบบริการ และภาวะผู้นำดิจิทัล → A, C, E6</p></div>
+          <div><b>เรียนรู้ในงาน ไม่ใช่แค่ในห้องอบรม</b><p>แนวโน้ม L&amp;D (เช่น LinkedIn Workplace Learning Report) เน้น Learning in the flow of work, Coaching, เส้นทางเรียนรู้รายบุคคล และ Micro-credential ผูกกับความก้าวหน้าในอาชีพ → ตอนที่ 3</p></div>
+          <div><b>คิดเชิงอนาคตและสุขภาวะ</b><p>องค์กรในยุคความไม่แน่นอนใช้ Strategic Foresight และให้ความสำคัญกับความยืดหยุ่นทางใจและสุขภาวะของคนทำงาน → ด้าน F</p></div>
+          <div><b>ทีมหลายเจเนอเรชัน</b><p>Reverse Mentoring และ Buddy ข้ามรุ่น ตามแนวคิด “Power of every Gen” ของ CDD NextGen → ด้าน E และตอนที่ 4</p></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="progress" aria-live="polite"><div class="bar"><i id="pbar"></i></div><span id="ptext">0%</span></div>
+
+    <form id="tna" novalidate>
+      <section class="part" id="part1">
+        <div class="part-head"><span class="no">ตอนที่ 1</span><h2>ข้อมูลทั่วไปของผู้ตอบ</h2></div>
+        <div class="card grid2">
+          <label class="f" id="w-name">ชื่อ–สกุล <span class="req">*</span><input type="text" id="name" name="name" autocomplete="name"></label>
+          <label class="f" id="w-position">ประเภทตำแหน่ง <span class="req">*</span>
+            <select id="position" name="position"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-level">ระดับตำแหน่ง
+            <select id="level" name="level"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-unit">สังกัด <span class="req">*</span>
+            <select id="unit" name="unit"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-subunit">กลุ่มงาน / ฝ่าย (ถ้ามี)<input type="text" id="subunit" name="subunit" placeholder="เช่น กลุ่มงานส่งเสริมเศรษฐกิจชุมชน"></label>
+          <label class="f" id="w-gen">ช่วงอายุ <span class="req">*</span>
+            <select id="gen" name="gen"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-tenure">อายุราชการ / อายุงานใน พช. <span class="req">*</span>
+            <select id="tenure" name="tenure"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-hack">การเข้าร่วม CDD NextGen Hackathon 2026 <span class="req">*</span>
+            <select id="hack" name="hack"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-ai">ปัจจุบันท่านใช้ AI (เช่น ChatGPT, Gemini, Claude) ในงานบ่อยแค่ไหน <span class="req">*</span>
+            <select id="aiuse" name="aiuse"><option value="">— เลือก —</option></select></label>
+        </div>
+      </section>
+
+      <section class="part" id="part2">
+        <div class="part-head"><span class="no">ตอนที่ 2</span><h2>ประเมินสมรรถนะและความต้องการพัฒนา</h2>
+          <p class="muted small">เลือกคะแนน 1–5 ทั้งสองมิติในทุกหัวข้อ หากหัวข้อใดไม่เกี่ยวข้องกับงานของท่าน ให้ทำเครื่องหมาย “ไม่เกี่ยวข้อง”</p></div>
+        <div class="card rubric">
+          <div><b>ความสำคัญต่องาน (I)</b><ol><li>แทบไม่ได้ใช้ในงาน</li><li>ใช้บ้างเป็นครั้งคราว</li><li>ใช้เป็นประจำ</li><li>สำคัญต่อผลงาน</li><li>ขาดไม่ได้ / ส่งผลต่อผลลัพธ์ของงานโดยตรง</li></ol></div>
+          <div><b>ความสามารถปัจจุบัน (D)</b><ol><li>ยังไม่มีความรู้ในเรื่องนี้</li><li>รู้หลักการ แต่ยังทำเองไม่ได้</li><li>ทำได้เมื่อมีผู้แนะนำ</li><li>ทำได้ด้วยตนเองอย่างมั่นใจ</li><li>ทำได้ดีและสอน/เป็นพี่เลี้ยงผู้อื่นได้</li></ol></div>
+        </div>
+        <div id="items"></div>
+      </section>
+
+      <section class="part" id="part3">
+        <div class="part-head"><span class="no">ตอนที่ 3</span><h2>รูปแบบการเรียนรู้ที่ต้องการ</h2></div>
+        <div class="card grid2">
+          <label class="f" id="w-goal">เป้าหมายการพัฒนาตนเองหลักของท่านใน 1–2 ปีนี้ <span class="req">*</span>
+            <select id="goal" name="goal"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-aiimpact">ท่านคิดว่า AI และเทคโนโลยีจะเปลี่ยนวิธีทำงานของท่านมากน้อยเพียงใดใน 3 ปีข้างหน้า <span class="req">*</span>
+            <select id="aiimpact" name="aiimpact"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-cred">ท่านสนใจหลักสูตรที่มีใบรับรองสั้น ๆ (Micro-credential / Digital Badge) หรือไม่
+            <select id="cred" name="cred"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-hours">เวลาที่ท่านพร้อมใช้เรียนรู้ด้วยตนเองต่อสัปดาห์
+            <select id="hours" name="hours"><option value="">— เลือก —</option></select></label>
+        </div>
+        <div class="card" style="display:grid;gap:14px">
+          <h3>รูปแบบการพัฒนาที่ท่านคิดว่าได้ผลกับท่านมากที่สุด (เลือกได้ไม่เกิน 3 ข้อ) <span class="req">*</span></h3>
+          <div class="choices" id="formats"></div>
+        </div>
+        <div class="card grid2">
+          <label class="f" id="w-duration">ระยะเวลาการอบรมที่เหมาะสม
+            <select id="duration" name="duration"><option value="">— เลือก —</option></select></label>
+          <label class="f" id="w-period">ช่วงเวลาที่สะดวกเข้ารับการพัฒนา
+            <select id="period" name="period"><option value="">— เลือก —</option></select></label>
+        </div>
+        <div class="card" style="display:grid;gap:14px">
+          <h3>อุปสรรคต่อการเรียนรู้และพัฒนาตนเองของท่าน (เลือกได้หลายข้อ)</h3>
+          <div class="choices" id="barriers"></div>
+        </div>
+      </section>
+
+      <section class="part" id="part4">
+        <div class="part-head"><span class="no">ตอนที่ 4</span><h2>ความคิดเห็นและข้อเสนอแนะ</h2></div>
+        <div class="card" style="display:grid;gap:14px">
+          <div class="f" id="w-top">หัวข้อที่ท่านต้องการพัฒนามากที่สุด 5 อันดับ (ดูหัวข้อได้จากข้อ A–G หรือหัวข้อที่ไม่มีในแบบนี้ก็ได้) <span class="req">*</span>
+            <span class="muted small" style="font-weight:400">เลือกอย่างน้อยอันดับ 1 หัวข้อที่เลือกแล้วจะไม่ซ้ำในอันดับอื่น</span>
+            <div class="ranks" id="topRanks"></div>
+            <label class="f" id="w-topOther" style="font-weight:400">อื่น ๆ (ระบุสั้น ๆ)
+              <input type="text" id="topOther" name="topOther" maxlength="120" placeholder="เช่น การเขียนโครงการขอรับงบประมาณจากแหล่งทุนภายนอก"></label>
+          </div>
+          <label class="f">ปัญหาหน้างานที่ท่านอยากให้การพัฒนาช่วยแก้ไข
+            <textarea id="pain" name="pain" placeholder="เช่น งานรายงานซ้ำซ้อนหลายระบบ ใช้เวลามาก ไม่มีเวลาลงพื้นที่"></textarea></label>
+          <label class="f">ความรู้ / ทักษะที่ท่านถนัดและยินดีถ่ายทอดให้เพื่อนร่วมงาน
+            <textarea id="share" name="share" placeholder="“ทุกคนเป็นทั้งผู้เรียนรู้และผู้ถ่ายทอด” เช่น ภูมิปัญญาท้องถิ่น การทำ Canva ระเบียบพัสดุ"></textarea></label>
+          <div class="f">ท่านสนใจเป็นวิทยากรภายใน / พี่เลี้ยง (Buddy ข้ามรุ่น) หรือไม่
+            <div class="choices" id="mentorBox"></div></div>
+          <label class="f">ข้อเสนอแนะอื่น ๆ
+            <textarea id="other" name="other"></textarea></label>
+        </div>
+      </section>
+
+      <div id="formMsg" aria-live="polite"></div>
+      <div class="actions">
+        <button class="btn" type="submit" id="submitBtn">ส่งแบบสำรวจ</button>
+        <span class="muted small" id="saveState"></span>
+      </div>
+    </form>
+  </main>
+
+  <!-- ================= ADMIN ================= -->
+  <section id="view-admin" hidden>
+    <div class="card login" id="loginBox">
+      <h2>เข้าสู่หน้าสรุปผล</h2>
+      <p class="muted small">ใส่รหัสผู้ดูแลที่ตั้งไว้ในขั้นตอน setup ของ Google Apps Script</p>
+      <label class="f">รหัสผู้ดูแล<input type="text" id="adminKey" autocomplete="off"></label>
+      <div class="actions" style="margin-top:0"><button class="btn" type="button" id="loginBtn">โหลดผลการสำรวจ</button></div>
+      <div id="loginMsg" aria-live="polite"></div>
+    </div>
+    <div id="adminBody" hidden>
+    <div class="kpis">
+      <div class="kpi"><span class="muted small">ตอบแล้ว</span><b id="k-n">0</b><span class="muted small" id="k-rate">จาก 108 คน</span></div>
+      <div class="kpi"><span class="muted small">หัวข้อที่ต้องพัฒนาเร่งด่วนที่สุด</span><b id="k-top" style="font-size:1.15rem;line-height:1.4">–</b></div>
+      <div class="kpi"><span class="muted small">ค่าเฉลี่ยช่องว่าง (I − D)</span><b id="k-gap">–</b></div>
+      <div class="kpi"><span class="muted small">ยินดีเป็นวิทยากร/พี่เลี้ยง</span><b id="k-mentor">0</b></div>
+    </div>
+
+    <div class="filters">
+      <label>ประเภทตำแหน่ง<select id="ff-position"><option value="">ทั้งหมด</option></select></label>
+      <label>สังกัด<select id="ff-unit"><option value="">ทั้งหมด</option><option value="__prov">สำนักงานจังหวัด</option><option value="__amp">สำนักงานอำเภอ (ทุกอำเภอ)</option></select></label>
+      <label>ช่วงอายุ<select id="ff-gen"><option value="">ทั้งหมด</option></select></label>
+      <label>Hackathon<select id="ff-hack"><option value="">ทั้งหมด</option></select></label>
+    </div>
+
+    <section class="part">
+      <div class="part-head"><h2>ลำดับความต้องการจำเป็น (PNI<sub>modified</sub>)</h2>
+        <p class="muted small">PNI = (I − D) ÷ D โดย I = ค่าเฉลี่ยความสำคัญ, D = ค่าเฉลี่ยความสามารถปัจจุบัน ค่ายิ่งสูงยิ่งควรพัฒนาก่อน แถบทองคือ 5 อันดับแรก</p></div>
+      <div id="pniBox"></div>
+    </section>
+
+    <section class="part">
+      <div class="part-head"><h2>หัวข้อที่บุคลากรเลือกให้พัฒนา (Top 5)</h2>
+        <p class="muted small">คะแนนถ่วงน้ำหนัก อันดับ 1 = 5 คะแนน ถึงอันดับ 5 = 1 คะแนน ใช้คู่กับ PNI เพื่อยืนยันลำดับความสำคัญ</p></div>
+      <div class="card hbars" id="topBox"></div>
+    </section>
+
+    <section class="part">
+      <div class="part-head"><h2>ภาพรวมรายด้าน</h2></div>
+      <div class="card hbars" id="domainBox"></div>
+    </section>
+
+    <section class="part">
+      <div class="part-head"><h2>รูปแบบการเรียนรู้ที่ต้องการ</h2></div>
+      <div class="grid2">
+        <div class="card"><h3 style="margin-bottom:10px">รูปแบบการพัฒนา</h3><div class="hbars" id="fmtBox"></div></div>
+        <div class="card"><h3 style="margin-bottom:10px">อุปสรรค</h3><div class="hbars" id="barBox"></div></div>
+        <div class="card"><h3 style="margin-bottom:10px">เป้าหมายการพัฒนาตนเอง</h3><div class="hbars" id="goalBox"></div></div>
+        <div class="card"><h3 style="margin-bottom:10px">มุมมองผลกระทบของ AI ต่องาน</h3><div class="hbars" id="aiBox"></div></div>
+      </div>
+    </section>
+
+    <section class="part">
+      <div class="part-head"><h2>วิทยากรภายในและความคิดเห็น</h2><p class="muted small">ใช้คัดเลือกพี่เลี้ยงข้ามรุ่นและออกแบบหลักสูตร</p></div>
+      <div class="voices" id="voiceBox"></div>
+    </section>
+
+    <section class="part">
+      <div class="part-head"><h2>ส่งออกข้อมูล</h2>
+        <p class="muted small">ข้อมูลดิบทั้งหมดอยู่ใน Google Sheets ชีต “คำตอบ” ปุ่มด้านล่างดาวน์โหลดเป็น CSV เปิดด้วย Excel ได้</p></div>
+      <div class="card" style="display:grid;gap:10px">
+        <div class="actions" style="margin-top:0">
+          <button class="btn" type="button" id="refreshBtn">โหลดข้อมูลล่าสุด</button>
+          <button class="btn ghost" type="button" id="csvBtn">ดาวน์โหลด CSV</button>
+        </div>
+        <div id="adminMsg" aria-live="polite"></div>
+      </div>
+    </section>
+    </div>
+  </section>
+</div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+"use strict";
+const TOTAL_STAFF = 108;
+const OPT = {
+  position:["ผู้บริหาร (พจ. / ผอ. / พอ.)","นักวิชาการพัฒนาชุมชน","เจ้าพนักงานพัฒนาชุมชน","สายสนับสนุน (นักจัดการงานทั่วไป / การเงิน / พัสดุ / ธุรการ ฯลฯ)","พนักงานราชการ","ลูกจ้าง / พนักงานจ้างเหมาบริการ"],
+  level:["ปฏิบัติการ / ปฏิบัติงาน","ชำนาญการ / ชำนาญงาน","ชำนาญการพิเศษ / อาวุโส","อำนวยการ / บริหาร","ไม่มีระดับ (พนักงานราชการ / ลูกจ้าง)"],
+  unit:["สำนักงานพัฒนาชุมชนจังหวัดเชียงราย"].concat(["เมืองเชียงราย","เวียงชัย","เชียงของ","เทิง","พาน","ป่าแดด","แม่จัน","เชียงแสน","แม่สาย","แม่สรวย","เวียงป่าเป้า","พญาเม็งราย","เวียงแก่น","ขุนตาล","แม่ฟ้าหลวง","แม่ลาว","เวียงเชียงรุ้ง","ดอยหลวง"].map(a=>"สพอ."+a)),
+  gen:["Gen Z (อายุไม่เกิน 29 ปี)","Gen Y (30–45 ปี)","Gen X (46–60 ปี)"],
+  tenure:["น้อยกว่า 1 ปี","1–3 ปี","4–10 ปี","11–20 ปี","มากกว่า 20 ปี"],
+  hack:["NextGen Innovation Team (เข้าร่วม 3 วัน)","เข้าร่วมวันที่ 3","ไม่ได้เข้าร่วม"],
+  aiuse:["ไม่เคยใช้","เคยลองใช้ 1–2 ครั้ง","ใช้บ้างเดือนละไม่กี่ครั้ง","ใช้ทุกสัปดาห์","ใช้เกือบทุกวัน"],
+  duration:["ครึ่งวัน","1 วัน","2–3 วัน","เรียนสั้น ๆ ต่อเนื่อง (สัปดาห์ละ 1–2 ชม.)"],
+  period:["ไตรมาส 1 (ต.ค.–ธ.ค. 69)","ไตรมาส 2 (ม.ค.–มี.ค. 70)","ไตรมาส 3 (เม.ย.–มิ.ย. 70)","ไตรมาส 4 (ก.ค.–ก.ย. 70)","ได้ทุกช่วง"],
+  formats:["อบรมในห้องเรียนโดยวิทยากร","Workshop / Hackathon ลงมือทำจริง","e-Learning / คลิปสั้น (Microlearning)","Coaching / Mentoring / Buddy ข้ามรุ่น","Reverse Mentoring (รุ่นใหม่สอนดิจิทัล รุ่นพี่สอนประสบการณ์)","เรียนรู้จากการปฏิบัติงานจริงในพื้นที่ (OJT)","Action Learning / ทดลองจริงใน Sandbox","เรียนรู้ระหว่างทำงานด้วยผู้ช่วย AI และคลังความรู้","เส้นทางเรียนรู้รายบุคคลตาม IDP","ศึกษาดูงานพื้นที่ต้นแบบ","ชุมชนนักปฏิบัติ (CoP) / แลกเปลี่ยนเรียนรู้","Webinar / ประชุมออนไลน์"],
+  goal:["ทำงานปัจจุบันให้ดีขึ้น (Upskill)","เรียนทักษะใหม่เพื่อรับงานใหม่ (Reskill)","เตรียมเลื่อนระดับ / ก้าวสู่ตำแหน่งบริหาร","เป็นผู้เชี่ยวชาญเฉพาะด้านหรือวิทยากรภายใน","ยังไม่ได้กำหนดเป้าหมาย"],
+  aiimpact:["แทบไม่เปลี่ยน","เปลี่ยนบางส่วน","เปลี่ยนมาก","เปลี่ยนเกือบทั้งหมด","ไม่แน่ใจ"],
+  cred:["สนใจมาก","สนใจ","เฉย ๆ","ไม่สนใจ"],
+  hours:["น้อยกว่า 1 ชั่วโมง","1–2 ชั่วโมง","3–5 ชั่วโมง","มากกว่า 5 ชั่วโมง"],
+  barriers:["ภาระงานประจำมาก ไม่มีเวลา","ระยะทางในการเดินทาง","อุปกรณ์ / อินเทอร์เน็ตไม่พร้อม","ขาดงบประมาณสนับสนุน","หลักสูตรไม่ตรงกับงานที่ทำ","ไม่มีโอกาสนำความรู้ไปใช้ต่อ","ขาดพี่เลี้ยงหรือผู้ให้คำปรึกษา"],
+  mentor:["สนใจเป็นวิทยากรภายใน","สนใจเป็นพี่เลี้ยง (Buddy)","ยังไม่พร้อม"]
+};
+const DOMAINS = [
+  {k:"A",t:"ข้อมูลและดิจิทัล",s:"Data → Information → Insight → Decision → Action",items:[
+    ["A1","การจัดเก็บและตรวจสอบคุณภาพข้อมูลชุมชน","จปฐ. กชช.2ค ข้อมูลครัวเรือน ข้อมูลกองทุน"],
+    ["A2","การวิเคราะห์ข้อมูลเพื่อหาสาเหตุและกลุ่มเป้าหมาย (Insight)","จัดกลุ่ม เปรียบเทียบ ใช้ข้อมูลประกอบการตัดสินใจ"],
+    ["A3","การนำเสนอข้อมูลด้วยภาพและ Dashboard","Excel / Google Sheets / Looker Studio / Infographic"],
+    ["A4","การเชื่อมโยงและบูรณาการฐานข้อมูลระหว่างหน่วยงาน","ลดการบันทึกซ้ำซ้อน นิยามข้อมูลกลาง"],
+    ["A5","ความปลอดภัยไซเบอร์และการคุ้มครองข้อมูลส่วนบุคคล (PDPA)","รู้เท่าทันภัยออนไลน์ ฟิชชิง การจัดการรหัสผ่าน"]]},
+  {k:"B",t:"ปัญญาประดิษฐ์ (AI)",s:"รู้จัก AI → ปรับแต่ง AI → บูรณาการ AI",items:[
+    ["B1","การใช้ Generative AI ในงานประจำ","ร่างหนังสือราชการ สรุปรายงาน สรุปการประชุม"],
+    ["B2","การเขียนคำสั่ง (Prompt) และปรับแต่ง AI ให้เหมาะกับงาน พช.","สร้างผู้ช่วย AI เฉพาะงาน เช่น CDD AI Assistant"],
+    ["B3","การบูรณาการ AI / ระบบอัตโนมัติเข้ากับกระบวนงาน","ลดงานเอกสาร คืนเวลาให้พัฒนากรลงพื้นที่"],
+    ["B4","การใช้ AI อย่างมีจริยธรรมและรู้เท่าทัน","ตรวจสอบความถูกต้อง ไม่ใส่ข้อมูลส่วนบุคคล"]]},
+  {k:"C",t:"นวัตกรรมและการคิดเชิงออกแบบ",s:"Real Problem → Empathize → Define → Ideate → Prototype → Test → Scale",items:[
+    ["C1","การทำความเข้าใจปัญหาและผู้รับบริการอย่างลึกซึ้ง","Empathize / Define จากโจทย์จริงในพื้นที่"],
+    ["C2","การระดมความคิดและออกแบบทางออกที่เรียบง่าย","Ideate / Frugal Innovation"],
+    ["C3","การสร้างต้นแบบ ทดลอง และวัดผล","Prototype / Test / 90-Day Sandbox"],
+    ["C4","การนำเสนอแนวคิดให้น่าสนใจ (Pitching / Storytelling)",""],
+    ["C5","การขยายผลนวัตกรรมและการจัดการความรู้ (KM)","ถอดบทเรียน แบ่งปันต้นแบบสู่อำเภออื่น"]]},
+  {k:"D",t:"งานพัฒนาชุมชนเชิงพื้นที่",s:"สมรรถนะตามภารกิจของ พช.",items:[
+    ["D1","การจัดทำแผนพัฒนาชุมชนเชิงพื้นที่แบบบูรณาการ / แผนตำบล",""],
+    ["D2","การส่งเสริม OTOP และการตลาดดิจิทัล / E-Commerce","พัฒนาผลิตภัณฑ์ บรรจุภัณฑ์ แบรนด์ ช่องทางขาย"],
+    ["D3","การส่งเสริมท่องเที่ยวชุมชนเชิงสร้างสรรค์","OTOP นวัตวิถี"],
+    ["D4","การบริหารจัดการกองทุนและทุนชุมชน","กข.คจ. กลุ่มออมทรัพย์ฯ กองทุนพัฒนาบทบาทสตรี หมู่บ้านกองทุนแม่ฯ"],
+    ["D5","การส่งเสริมสัมมาชีพ / โคก หนอง นา",""],
+    ["D6","การพัฒนาคุณภาพชีวิตกลุ่มเปราะบางและสังคมสูงวัย","ครัวเรือนตกเกณฑ์ จปฐ. Smart Aging Community"],
+    ["D7","การบริหารโครงการแบบมุ่งผลลัพธ์และการติดตามประเมินผล","ตั้งตัวชี้วัด วัดผลก่อน–หลัง ใช้งบให้ตอบโจทย์พื้นที่"]]},
+  {k:"E",t:"การทำงานร่วมกันและภาวะผู้นำ",s:"Power of every Gen",items:[
+    ["E1","การทำงานเป็นทีมข้ามรุ่น (ทุก Gen)",""],
+    ["E2","การเป็นวิทยากรกระบวนการ (Facilitator)","ประชุมเวทีประชาคม ระดมความคิดชุมชน"],
+    ["E3","การสร้างและประสานภาคีเครือข่าย","ท้องถิ่น สถาบันการศึกษา เอกชน ผู้นำ อช."],
+    ["E4","การโค้ชและเป็นพี่เลี้ยงผู้อื่น",""],
+    ["E5","การปรับตัวและกรอบคิดแบบเติบโต (Growth Mindset)","จาก “เป็นไปไม่ได้” สู่ “ต้องเริ่มตรงไหน”"],
+    ["E6","ภาวะผู้นำดิจิทัลและการนำการเปลี่ยนแปลง","ชวนทีมทดลองวิธีทำงานใหม่ ตัดสินใจจากข้อมูล"]]},
+  {k:"F",t:"ทักษะแห่งอนาคตและการเรียนรู้ตลอดชีวิต",s:"Future Skills · WEF 2025",items:[
+    ["F1","การคิดวิเคราะห์และการคิดเชิงระบบ","มองเห็นความเชื่อมโยงของปัญหาเศรษฐกิจ สังคม สิ่งแวดล้อม"],
+    ["F2","การคิดเชิงอนาคตและการวางภาพฉากทัศน์ (Foresight)","คาดการณ์เชียงราย 2030 สังคมสูงวัย ภูมิอากาศ ชายแดน"],
+    ["F3","การเรียนรู้ด้วยตนเองอย่างต่อเนื่อง (Self-directed Learning)","หาความรู้จากแหล่งออนไลน์ ตั้งเป้าการเรียนรู้ของตนเอง"],
+    ["F4","ความยืดหยุ่นทางใจและการดูแลสุขภาวะในการทำงาน (Resilience)","จัดการความเครียด สมดุลชีวิตและงาน"],
+    ["F5","การสื่อสารสร้างสรรค์ผ่านสื่อดิจิทัล","ทำคลิปสั้น โพสต์ Infographic เล่าเรื่องชุมชน"]]},
+  {k:"G",t:"งานบริหารและสนับสนุน",s:"",items:[
+    ["G1","ระเบียบการเงิน การคลัง และพัสดุ (e-GP / GFMIS)",""],
+    ["G2","งานสารบรรณอิเล็กทรอนิกส์และการเขียนหนังสือราชการ",""],
+    ["G3","การเขียนโครงการและจัดทำคำของบประมาณ",""]]}
+];
+const ITEMS = DOMAINS.flatMap(d=>d.items.map(i=>({id:i[0],t:i[1],h:i[2],d:d.k})));
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* ---------- build form ---------- */
+["position","level","unit","gen","tenure","hack","aiuse","duration","period","goal","aiimpact","cred","hours"].forEach(k=>{
+  const sel=$("#"+k); OPT[k].forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o)});
+});
+function checks(boxId,name,list,type){
+  $(boxId).innerHTML=list.map((v,i)=>`<label class="chk"><input type="${type||"checkbox"}" name="${name}" id="${name}_${i}" value="${esc(v)}"><span>${esc(v)}</span></label>`).join("");
+}
+checks("#formats","formats",OPT.formats);
+checks("#barriers","barriers",OPT.barriers);
+checks("#mentorBox","mentor",OPT.mentor,"radio");
+$("#items").innerHTML=DOMAINS.map(d=>`
+  <div class="domain">
+    <div class="domain-title"><span class="tag">${d.k}</span><h3>${esc(d.t)}</h3>${d.s?`<span class="muted small">${esc(d.s)}</span>`:""}</div>
+    ${d.items.map(([id,t,h])=>`
+    <div class="item" id="it-${id}">
+      <div class="item-head"><span class="code">${id}</span><p>${esc(t)}</p>${h?`<span class="hint">${esc(h)}</span>`:""}</div>
+      <div class="scales">
+        ${["I","D"].map(dim=>`<fieldset><legend>${dim==="I"?"ความสำคัญต่องาน (I)":"ความสามารถปัจจุบัน (D)"}</legend><div class="seg">
+          ${[1,2,3,4,5].map(n=>`<label><input type="radio" name="${dim}_${id}" id="${dim}_${id}_${n}" value="${n}"><span>${n}</span></label>`).join("")}
+        </div></fieldset>`).join("")}
+        <label class="chk"><input type="checkbox" name="NA_${id}" id="NA_${id}"><span>ไม่เกี่ยวข้อง</span></label>
+      </div>
+    </div>`).join("")}
+  </div>`).join("");
+
+const OTHER="OTHER";
+const itemLabel=(id,r)=>id===OTHER?("อื่น ๆ"+(r&&r.topOther?": "+r.topOther:"")):(()=>{const it=ITEMS.find(x=>x.id===id);return it?it.id+" "+it.t:id})();
+const rankOpts='<option value="">— เลือกหัวข้อ —</option>'+DOMAINS.map(d=>`<optgroup label="${d.k} ${esc(d.t)}">${d.items.map(([id,t])=>`<option value="${id}">${id} ${esc(t)}</option>`).join("")}</optgroup>`).join("")+`<optgroup label="อื่น ๆ"><option value="${OTHER}">อื่น ๆ (ระบุในช่องด้านล่าง)</option></optgroup>`;
+$("#topRanks").innerHTML=[1,2,3,4,5].map(n=>`<label for="top_${n}"><span>อันดับ ${n}</span><select id="top_${n}" name="top_${n}">${rankOpts}</select></label>`).join("");
+const RANKS=[1,2,3,4,5].map(n=>"top_"+n);
+function syncTop(){
+  const used=RANKS.map(k=>$("#"+k).value);
+  RANKS.forEach((k,i)=>[...$("#"+k).options].forEach(o=>{if(o.value) o.disabled=used.some((u,j)=>j!==i&&u===o.value)}));
+}
+$("#topRanks").addEventListener("change",syncTop);
+
+/* ---------- read / write form state ---------- */
+const form=$("#tna");
+const TEXT=["name","position","level","unit","subunit","gen","tenure","hack","aiuse","duration","period","goal","aiimpact","cred","hours","top_1","top_2","top_3","top_4","top_5","topOther","pain","share","other"];
+function readForm(){
+  const r={v:1};
+  TEXT.forEach(k=>r[k]=(form.elements[k].value||"").trim());
+  r.formats=[...form.querySelectorAll('input[name="formats"]:checked')].map(x=>x.value);
+  r.barriers=[...form.querySelectorAll('input[name="barriers"]:checked')].map(x=>x.value);
+  r.mentor=(form.querySelector('input[name="mentor"]:checked')||{}).value||"";
+  r.ratings={};
+  ITEMS.forEach(it=>{
+    const na=form.elements["NA_"+it.id].checked;
+    const I=+(form.querySelector(`input[name="I_${it.id}"]:checked`)||{}).value||0;
+    const D=+(form.querySelector(`input[name="D_${it.id}"]:checked`)||{}).value||0;
+    r.ratings[it.id]=na?"NA":[I,D];
+  });
+  return r;
+}
+function fillForm(r){
+  if(!r) return;
+  TEXT.forEach(k=>{if(r[k]!=null) form.elements[k].value=r[k]});
+  form.querySelectorAll('input[name="formats"]').forEach(x=>x.checked=(r.formats||[]).includes(x.value));
+  form.querySelectorAll('input[name="barriers"]').forEach(x=>x.checked=(r.barriers||[]).includes(x.value));
+  form.querySelectorAll('input[name="mentor"]').forEach(x=>x.checked=x.value===r.mentor);
+  ITEMS.forEach(it=>{
+    const v=(r.ratings||{})[it.id];
+    form.elements["NA_"+it.id].checked=v==="NA";
+    ["I","D"].forEach((dim,j)=>{const n=Array.isArray(v)?v[j]:0;
+      form.querySelectorAll(`input[name="${dim}_${it.id}"]`).forEach(x=>x.checked=+x.value===n)});
+  });
+  syncNA(); syncTop(); progress();
+}
+function syncNA(){ITEMS.forEach(it=>$("#it-"+it.id).classList.toggle("na",form.elements["NA_"+it.id].checked))}
+function missing(r){
+  const m=[];
+  ["name","position","unit","gen","tenure","hack","aiuse"].forEach(k=>{if(!r[k]) m.push("w-"+k)});
+  ITEMS.forEach(it=>{const v=r.ratings[it.id]; if(v!=="NA"&&(!v[0]||!v[1])) m.push("it-"+it.id)});
+  if(!r.goal) m.push("w-goal");
+  if(!r.aiimpact) m.push("w-aiimpact");
+  if(!r.formats.length) m.push("formats");
+  if(!r.top_1) m.push("w-top");
+  if(RANKS.some(k=>r[k]===OTHER)&&!r.topOther) m.push("w-topOther");
+  return m;
+}
+function progress(){
+  const r=readForm(); const total=7+ITEMS.length+4; const left=missing(r).length;
+  const pct=Math.round((total-left)/total*100);
+  $("#pbar").style.width=pct+"%"; $("#ptext").textContent=pct+"%";
+}
+const LS="tna-cr-2570-draft";
+let draftT;
+form.addEventListener("input",e=>{
+  if(e.target.name==="formats"){
+    const on=form.querySelectorAll('input[name="formats"]:checked');
+    if(on.length>3){e.target.checked=false}
+  }
+  if(e.target.name&&e.target.name.startsWith("NA_")) syncNA();
+  const it=e.target.closest(".item"); if(it) it.classList.remove("missing");
+  progress();
+  clearTimeout(draftT); draftT=setTimeout(()=>{try{localStorage.setItem(LS,JSON.stringify(readForm()))}catch(_){}} ,600);
+});
+try{const d=localStorage.getItem(LS); if(d) fillForm(JSON.parse(d))}catch(_){}
+progress();
+
+/* ---------- Google Sheets backend ---------- */
+const CFG=window.TNA_CONFIG||{};
+const SCRIPT_URL=(CFG.SCRIPT_URL||"").trim();
+function msg(el,kind,html){$(el).innerHTML=html?`<div class="notice ${kind}">${html}</div>`:""}
+function respId(){
+  let id=null; try{id=localStorage.getItem("tna-resp-id")}catch(_){}
+  if(!id){id="r-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,8); try{localStorage.setItem("tna-resp-id",id)}catch(_){}}
+  return id;
+}
+async function post(payload){
+  const body=JSON.stringify(payload);
+  try{
+    const res=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body});
+    const j=await res.json(); if(!j.ok) throw new Error(j.error||"save failed"); return true;
+  }catch(err){
+    if(err instanceof TypeError){ // CORS read blocked: send blind (server upserts by respId so no duplicates)
+      await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body}); return true;
+    }
+    throw err;
+  }
+}
+try{const t=localStorage.getItem("tna-submitted-at"); if(t) $("#saveState").textContent="ท่านส่งแบบสำรวจจากเครื่องนี้แล้วเมื่อ "+new Date(t).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"})+" · แก้ไขแล้วส่งซ้ำได้ (ระบบจะแทนที่คำตอบเดิม)"}catch(_){}
+
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const r=readForm(); const m=missing(r);
+  document.querySelectorAll(".item.missing").forEach(x=>x.classList.remove("missing"));
+  if(m.length){
+    m.forEach(id=>{const el=document.getElementById(id); if(el&&el.classList.contains("item")) el.classList.add("missing")});
+    msg("#formMsg","err",`ยังตอบไม่ครบ ${m.length} รายการ ระบบเลื่อนไปยังข้อแรกที่ยังขาดให้แล้ว`);
+    const first=document.getElementById(m[0]); if(first) first.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  if(!SCRIPT_URL){msg("#formMsg","err","ยังไม่ได้ตั้งค่า SCRIPT_URL ในไฟล์ config.js กรุณาแจ้งผู้ดูแลแบบสำรวจ");return}
+  r.submittedAt=new Date().toISOString(); r.respId=respId();
+  const btn=$("#submitBtn"); btn.disabled=true; btn.textContent="กำลังส่ง…";
+  try{
+    await post({action:"submit",data:r});
+    try{localStorage.setItem(LS,JSON.stringify(r));localStorage.setItem("tna-submitted-at",r.submittedAt)}catch(_){}
+    $("#saveState").textContent="";
+    msg("#formMsg","ok",`<b>ส่งแบบสำรวจเรียบร้อยแล้ว</b> ขอบคุณที่ร่วมออกแบบการพัฒนาบุคลากร พช.เชียงราย หากต้องการแก้ไข แก้แล้วกดส่งอีกครั้งจากเครื่องเดิมได้`);
+  }catch(err){
+    msg("#formMsg","err","ส่งไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วกดส่งอีกครั้ง คำตอบของท่านยังอยู่ในฟอร์ม");
+  }
+  btn.disabled=false; btn.textContent="ส่งแบบสำรวจ";
+  $("#formMsg").scrollIntoView({behavior:"smooth",block:"center"});
+});
+
+/* ---------- tabs ---------- */
+function show(tab){
+  const admin=tab==="admin";
+  $("#view-form").hidden=admin; $("#view-admin").hidden=!admin;
+  $("#tab-form").setAttribute("aria-selected",!admin); $("#tab-admin").setAttribute("aria-selected",admin);
+  try{localStorage.setItem("tna-tab",tab)}catch(_){}
+}
+$("#tab-form").onclick=()=>show("form"); $("#tab-admin").onclick=()=>show("admin");
+
+/* ---------- admin analytics ---------- */
+let ALL=[];
+["position","gen","hack"].forEach(k=>OPT[k].forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;$("#ff-"+k).appendChild(o)}));
+["ff-position","ff-unit","ff-gen","ff-hack"].forEach(id=>$("#"+id).addEventListener("change",renderAdmin));
+const fmt=(x,d=2)=>Number.isFinite(x)?x.toFixed(d):"–";
+function filtered(){
+  const p=$("#ff-position").value,u=$("#ff-unit").value,g=$("#ff-gen").value,h=$("#ff-hack").value;
+  return ALL.filter(r=>(!p||r.position===p)&&(!g||r.gen===g)&&(!h||r.hack===h)&&
+    (!u||(u==="__prov"?r.unit===OPT.unit[0]:u==="__amp"?r.unit!==OPT.unit[0]:r.unit===u)));
+}
+function stats(rows){
+  return ITEMS.map(it=>{
+    let sI=0,sD=0,n=0;
+    rows.forEach(r=>{const v=(r.ratings||{})[it.id]; if(Array.isArray(v)&&v[0]&&v[1]){sI+=v[0];sD+=v[1];n++}});
+    const I=n?sI/n:NaN,D=n?sD/n:NaN;
+    return {...it,n,I,D,gap:I-D,pni:n?(I-D)/D:NaN};
+  });
+}
+function hbars(box,list,rows,key){
+  const counts=list.map(v=>[v,rows.filter(r=>{const x=r[key];return Array.isArray(x)?x.includes(v):x===v}).length]).sort((a,b)=>b[1]-a[1]);
+  const max=Math.max(1,...counts.map(c=>c[1]));
+  $(box).innerHTML=rows.length?counts.map(([v,c])=>`<div class="hbar"><span>${esc(v)}</span><div class="track"><i style="width:${c/max*100}%"></i></div><span>${c}</span></div>`).join(""):`<div class="empty">ยังไม่มีคำตอบ</div>`;
+}
+function renderAdmin(){
+  const rows=filtered();
+  $("#k-n").textContent=ALL.length;
+  $("#k-rate").textContent=`จาก ${TOTAL_STAFF} คน (${Math.round(ALL.length/TOTAL_STAFF*100)}%)`+(rows.length!==ALL.length?` · ตัวกรอง ${rows.length} คน`:"");
+  $("#k-mentor").textContent=rows.filter(r=>r.mentor&&r.mentor!==OPT.mentor[2]).length;
+  const st=stats(rows).filter(s=>s.n).sort((a,b)=>b.pni-a.pni);
+  if(!st.length){
+    $("#pniBox").innerHTML=`<div class="empty">ยังไม่มีคำตอบ เมื่อบุคลากรส่งแบบสำรวจ ตารางจัดลำดับความต้องการจะแสดงที่นี่โดยอัตโนมัติ<br>ส่งลิงก์หน้านี้ให้บุคลากรทั้ง 108 คนเพื่อเริ่มเก็บข้อมูล</div>`;
+    $("#domainBox").innerHTML=`<div class="empty">ยังไม่มีคำตอบ</div>`;
+    $("#k-top").textContent="–"; $("#k-gap").textContent="–";
+  }else{
+    const maxP=Math.max(...st.map(s=>s.pni),0.01);
+    $("#k-top").textContent=st[0].id+" "+st[0].t;
+    const gaps=st.map(s=>s.gap); $("#k-gap").textContent=fmt(gaps.reduce((a,b)=>a+b,0)/gaps.length);
+    $("#pniBox").innerHTML=`<div class="tbl-wrap"><table><thead><tr><th>อันดับ</th><th>หัวข้อ</th><th>ด้าน</th><th class="num">n</th><th class="num">I</th><th class="num">D</th><th>PNI</th></tr></thead><tbody>${
+      st.map((s,i)=>`<tr class="${i<5?"top":""}"><td class="num" style="text-align:left">${i+1}</td><td><b>${s.id}</b> ${esc(s.t)}</td><td><span class="pill ${i<5?"hot":""}">${esc(DOMAINS.find(d=>d.k===s.d).t)}</span></td><td class="num">${s.n}</td><td class="num">${fmt(s.I)}</td><td class="num">${fmt(s.D)}</td><td><div class="pni"><div class="track"><i style="width:${Math.max(0,s.pni)/maxP*100}%"></i></div><span class="num">${fmt(s.pni,3)}</span></div></td></tr>`).join("")
+    }</tbody></table></div>`;
+    const dom=DOMAINS.map(d=>{const ss=st.filter(s=>s.d===d.k);return [d,ss.length?ss.reduce((a,s)=>a+s.pni,0)/ss.length:NaN]}).sort((a,b)=>(b[1]||0)-(a[1]||0));
+    const dm=Math.max(0.01,...dom.map(x=>x[1]||0));
+    $("#domainBox").innerHTML=dom.map(([d,p])=>`<div class="hbar"><span><b>${d.k}</b> ${esc(d.t)}</span><div class="track"><i style="width:${Math.max(0,p||0)/dm*100}%;background:var(--gold)"></i></div><span>${fmt(p,3)}</span></div>`).join("")+`<p class="muted small">ค่า PNI เฉลี่ยของหัวข้อในแต่ละด้าน</p>`;
+  }
+  hbars("#fmtBox",OPT.formats,rows,"formats");
+  hbars("#barBox",OPT.barriers,rows,"barriers");
+  hbars("#goalBox",OPT.goal,rows,"goal");
+  hbars("#aiBox",OPT.aiimpact,rows,"aiimpact");
+  const pts={};
+  rows.forEach(r=>RANKS.forEach((k,i)=>{const v=r[k]; if(v) pts[v]=(pts[v]||0)+(5-i)}));
+  const tops=Object.entries(pts).sort((a,b)=>b[1]-a[1]).slice(0,12); const tm=Math.max(1,...tops.map(t=>t[1]));
+  $("#topBox").innerHTML=tops.length?tops.map(([id,p])=>`<div class="hbar"><span>${esc(itemLabel(id))}</span><div class="track"><i style="width:${p/tm*100}%;background:var(--gold)"></i></div><span>${p}</span></div>`).join(""):`<div class="empty">ยังไม่มีคำตอบ</div>`;
+  const topText=r=>RANKS.map((k,i)=>r[k]?`${i+1}) ${itemLabel(r[k],r)}`:"").filter(Boolean).join("  ");
+  const voices=rows.filter(r=>r.top_1||r.top3||r.pain||r.share||r.other).sort((a,b)=>(b.mentor&&b.mentor!==OPT.mentor[2])-(a.mentor&&a.mentor!==OPT.mentor[2]));
+  $("#voiceBox").innerHTML=voices.length?voices.map(r=>`<div class="voice"><div class="who">${esc(r.name)} <span class="muted small">· ${esc(r.position)} · ${esc(r.unit)}</span> ${r.mentor&&r.mentor!==OPT.mentor[2]?`<span class="pill hot">${esc(r.mentor)}</span>`:""}</div>
+    ${(r.top_1||r.top3)?`<div><span class="muted">อยากพัฒนา:</span> ${esc(topText(r)||r.top3)}</div>`:""}
+    ${r.pain?`<div><span class="muted">ปัญหาหน้างาน:</span> ${esc(r.pain)}</div>`:""}
+    ${r.share?`<div><span class="muted">ถ่ายทอดได้:</span> ${esc(r.share)}</div>`:""}
+    ${r.other?`<div><span class="muted">ข้อเสนอแนะ:</span> ${esc(r.other)}</div>`:""}</div>`).join(""):`<div class="empty">ยังไม่มีความคิดเห็น</div>`;
+}
+renderAdmin();
+
+function csv(){
+  const head=["ชื่อ-สกุล","ประเภทตำแหน่ง","ระดับ","สังกัด","กลุ่มงาน","ช่วงอายุ","อายุราชการ","Hackathon","การใช้ AI","รูปแบบการเรียนรู้","ระยะเวลา","ช่วงเวลา","อุปสรรค","เป้าหมายการพัฒนา","ผลกระทบ AI","Micro-credential","ชม.เรียนรู้/สัปดาห์","อันดับ 1","อันดับ 2","อันดับ 3","อันดับ 4","อันดับ 5","อื่น ๆ (ระบุ)","ปัญหาหน้างาน","ถ่ายทอดได้","วิทยากร/พี่เลี้ยง","ข้อเสนอแนะ","วันที่ส่ง"]
+    .concat(ITEMS.flatMap(it=>[it.id+"_I",it.id+"_D"]));
+  const q=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+  const lines=ALL.map(r=>[r.name,r.position,r.level,r.unit,r.subunit,r.gen,r.tenure,r.hack,r.aiuse,(r.formats||[]).join("; "),r.duration,r.period,(r.barriers||[]).join("; "),r.goal,r.aiimpact,r.cred,r.hours,...RANKS.map(k=>r[k]?itemLabel(r[k]):""),r.topOther,r.pain,r.share,r.mentor,r.other,r.submittedAt]
+    .concat(ITEMS.flatMap(it=>{const v=(r.ratings||{})[it.id];return v==="NA"?["NA","NA"]:Array.isArray(v)?v:["",""]})).map(q).join(","));
+  return "﻿"+[head.map(q).join(",")].concat(lines).join("\r\n");
+}
+$("#csvBtn").onclick=()=>{
+  const blob=new Blob([csv()],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="TNA_CDD_ChiangRai_2570.csv";
+  document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+};
+
+/* ---------- admin (open with #admin) ---------- */
+async function loadAll(){
+  const key=$("#adminKey").value.trim();
+  if(!SCRIPT_URL){msg("#loginMsg","err","ยังไม่ได้ตั้งค่า SCRIPT_URL ในไฟล์ config.js");return}
+  if(!key){msg("#loginMsg","err","กรุณาใส่รหัสผู้ดูแล");return}
+  msg("#loginMsg","info","กำลังโหลด…");
+  try{
+    const res=await fetch(SCRIPT_URL+"?action=list&key="+encodeURIComponent(key));
+    const j=await res.json();
+    if(!j.ok){msg("#loginMsg","err",j.error==="unauthorized"?"รหัสผู้ดูแลไม่ถูกต้อง":"โหลดไม่สำเร็จ: "+esc(j.error));return}
+    ALL=j.rows||[]; try{sessionStorage.setItem("tna-key",key)}catch(_){}
+    msg("#loginMsg","",""); $("#loginBox").hidden=true; $("#adminBody").hidden=false;
+    msg("#adminMsg","ok","โหลดข้อมูลล่าสุดแล้ว "+new Date().toLocaleTimeString("th-TH")); renderAdmin();
+  }catch(_){msg("#loginMsg","err","เชื่อมต่อ Google Sheets ไม่ได้ ตรวจสอบ SCRIPT_URL และการ Deploy แบบ “ทุกคน (Anyone)”")}
+}
+$("#loginBtn").onclick=loadAll;
+$("#refreshBtn").onclick=loadAll;
+function bootAdmin(){
+  if(location.hash!=="#admin") return;
+  $("#tabs").hidden=false; show("admin");
+  try{const k=sessionStorage.getItem("tna-key"); if(k){$("#adminKey").value=k; loadAll()}}catch(_){}
+}
+window.addEventListener("hashchange",bootAdmin);
+bootAdmin();
+})();
+</script>
+</body>
+</html>
