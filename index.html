@@ -333,7 +333,12 @@ img{max-width:100%}
   </section>
 </div>
 
-<script src="config.js"></script>
+<script>
+// URL ของ Web App (Google Apps Script) ที่เก็บคำตอบลง Google Sheets
+window.TNA_CONFIG = {
+  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwIzIV-OK_dvWCgmuzNy850M4eV4k11fMN6c_B8XKbXIcOTTeMj7OMPTWReATu6td6A3Q/exec"
+};
+</script>
 <script>
 (function(){
 "use strict";
@@ -513,17 +518,33 @@ function respId(){
   if(!id){id="r-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,8); try{localStorage.setItem("tna-resp-id",id)}catch(_){}}
   return id;
 }
-async function post(payload){
-  const body=JSON.stringify(payload);
-  try{
-    const res=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body});
-    const j=await res.json(); if(!j.ok) throw new Error(j.error||"save failed"); return true;
-  }catch(err){
-    if(err instanceof TypeError){ // CORS read blocked: send blind (server upserts by respId so no duplicates)
-      await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body}); return true;
-    }
-    throw err;
+function sendForm(payload){
+  // POST ผ่านฟอร์มซ่อน + iframe: ไม่ติดข้อจำกัด CORS ของเบราว์เซอร์
+  return new Promise(resolve=>{
+    const name="tna_sink_"+Date.now();
+    const ifr=document.createElement("iframe"); ifr.name=name; ifr.hidden=true; ifr.setAttribute("aria-hidden","true");
+    const f=document.createElement("form"); f.method="POST"; f.action=SCRIPT_URL; f.target=name; f.hidden=true;
+    const inp=document.createElement("input"); inp.type="hidden"; inp.name="payload"; inp.value=JSON.stringify(payload);
+    f.appendChild(inp); document.body.appendChild(ifr); document.body.appendChild(f);
+    let done=false; const fin=()=>{if(done)return; done=true; setTimeout(()=>{ifr.remove();f.remove()},2000); resolve()};
+    ifr.addEventListener("load",fin); setTimeout(fin,15000);
+    f.submit();
+  });
+}
+async function isSaved(id){
+  for(let k=0;k<4;k++){
+    try{
+      const res=await fetch(SCRIPT_URL+"?action=check&id="+encodeURIComponent(id)+"&t="+Date.now());
+      const j=await res.json(); if(j.found) return true;
+    }catch(_){}
+    await new Promise(r=>setTimeout(r,1500));
   }
+  return false;
+}
+async function post(payload){
+  await sendForm(payload);
+  if(!(await isSaved(payload.data.respId))) throw new Error("not saved");
+  return true;
 }
 try{const t=localStorage.getItem("tna-submitted-at"); if(t) $("#saveState").textContent="ท่านส่งแบบสำรวจจากเครื่องนี้แล้วเมื่อ "+new Date(t).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"})+" · แก้ไขแล้วส่งซ้ำได้ (ระบบจะแทนที่คำตอบเดิม)"}catch(_){}
 
@@ -539,14 +560,14 @@ form.addEventListener("submit",async e=>{
   }
   if(!SCRIPT_URL){msg("#formMsg","err","ยังไม่ได้ตั้งค่า SCRIPT_URL ในไฟล์ config.js กรุณาแจ้งผู้ดูแลแบบสำรวจ");return}
   r.submittedAt=new Date().toISOString(); r.respId=respId();
-  const btn=$("#submitBtn"); btn.disabled=true; btn.textContent="กำลังส่ง…";
+  const btn=$("#submitBtn"); btn.disabled=true; btn.textContent="กำลังส่งและตรวจสอบ…";
   try{
     await post({action:"submit",data:r});
     try{localStorage.setItem(LS,JSON.stringify(r));localStorage.setItem("tna-submitted-at",r.submittedAt)}catch(_){}
     $("#saveState").textContent="";
     msg("#formMsg","ok",`<b>ส่งแบบสำรวจเรียบร้อยแล้ว</b> ขอบคุณที่ร่วมออกแบบการพัฒนาบุคลากร พช.เชียงราย หากต้องการแก้ไข แก้แล้วกดส่งอีกครั้งจากเครื่องเดิมได้`);
   }catch(err){
-    msg("#formMsg","err","ส่งไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วกดส่งอีกครั้ง คำตอบของท่านยังอยู่ในฟอร์ม");
+    msg("#formMsg","err","ระบบยังยืนยันการบันทึกไม่ได้ กรุณากดส่งอีกครั้ง (คำตอบของท่านยังอยู่ในฟอร์ม และส่งซ้ำได้โดยไม่เกิดข้อมูลซ้ำ) หากยังไม่สำเร็จ โปรดแจ้งผู้ดูแลแบบสำรวจ");
   }
   btn.disabled=false; btn.textContent="ส่งแบบสำรวจ";
   $("#formMsg").scrollIntoView({behavior:"smooth",block:"center"});
